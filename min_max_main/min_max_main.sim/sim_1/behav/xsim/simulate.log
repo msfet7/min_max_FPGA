@@ -1,0 +1,8 @@
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+--------------------------------
+Calculation finished
+Minimum =     -4
+Maximum =     21
+--------------------------------
+$finish called at time : 205 ns : File "/home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.srcs/sim_1/new/main_tb.sv" Line 79
