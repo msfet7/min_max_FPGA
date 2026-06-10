@@ -7,14 +7,14 @@ module main_tb;
     reg reset;
     reg request;
 
-    reg [15:0] leftBorder;
-    reg [15:0] rightBorder;
+    reg [31:0] leftBorder;
+    reg [31:0] rightBorder;
 
-    reg signed [6:0] coeffs [0:5];
+    reg signed [31:0] coeffs [0:5];
 
     wire status;
-    wire signed [15:0] minimum;
-    wire signed [15:0] maximum;
+    wire signed [31:0] minimum;
+    wire signed [31:0] maximum;
 
     minMaxModule dut (
         .clk(clk),
@@ -51,15 +51,15 @@ module main_tb;
         #20;
         reset = 0;
 
-        coeffs[0] =  -4; // C
-        coeffs[1] =  0; // x
-        coeffs[2] =  1; // x^2 
+        coeffs[0] =  -2; // C
+        coeffs[1] =  8; // x
+        coeffs[2] =  -1; // x^2 
         coeffs[3] =  0; // x^3
-        coeffs[4] =  0; // x^4z
+        coeffs[4] =  1; // x^4
         coeffs[5] =  0; // x^5
 
-        leftBorder  = -5;
-        rightBorder =  5;
+        leftBorder  = -3;
+        rightBorder =  2;
 
         @(posedge clk);
         request = 1;
