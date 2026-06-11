@@ -129,15 +129,11 @@ module minMaxModule (input clk,
             static reg signed [31:0] temp32 = coeffs[size-1] * FXP_MUL;
             funcVal = 0;
             size--;
-            $display("%d",temp32);
             while (size != 0) 
             begin             
                 temp64 = temp32 * x;
-                $display("%h",temp64);
                 temp32 = (temp64 >>> FXP_SHIFT)  + coeffs[size-1] * FXP_MUL;
                 size--;  
-                $display("%h",temp32);
-                $display("%h",temp64);
             end
             funcVal = temp32;
         end
