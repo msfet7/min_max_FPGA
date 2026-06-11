@@ -52,7 +52,7 @@ module minMaxModule (input clk,
         begin
             status <= 0;
             state <= IDLE;
-            current_x <= leftBorder* FXP_MUL;
+            current_x <= leftBorder;
             maximum  <= 0;
             minimum <= 0;
         end
@@ -60,13 +60,13 @@ module minMaxModule (input clk,
         begin
             case (state)
                 IDLE: begin
-                    current_x <= leftBorder * FXP_MUL;
+                    current_x <= leftBorder;
                     state = (request == 1'b1) ? BORDER_CALC : IDLE;
                 end
                 BORDER_CALC: begin
                     /* Assume that left boarder in min and right boarder is max */
-                    current_min = funcVal(coeffs, leftBorder * FXP_MUL, 6);
-                    current_max = funcVal(coeffs, rightBorder * FXP_MUL, 6);
+                    current_min = funcVal(coeffs, leftBorder , 6);
+                    current_max = funcVal(coeffs, rightBorder , 6);
                     if (current_max < current_min)
                     begin
                         /* Wrong assumption flip the values */
@@ -90,7 +90,7 @@ module minMaxModule (input clk,
                     end
                     current_x += step;
 
-                    if(current_x > rightBorder * FXP_MUL)
+                    if(current_x > rightBorder)
                     begin
                         maximum <= current_max;
                         minimum <= current_min;
@@ -101,7 +101,7 @@ module minMaxModule (input clk,
                     /* Cleanup after SCAN */
                     current_max = 0;
                     current_min = 'hFFFFFFFF;
-                    current_x = leftBorder * FXP_MUL;
+                    current_x = leftBorder;
 
                     /* Set status and go to IDLE if no request*/
                     status <= 1;
@@ -126,14 +126,18 @@ module minMaxModule (input clk,
                             input [3:0] size);
         begin
             static reg signed [63:0] temp64 = 0;
-            static reg signed [31:0] temp32 = coeffs[size-1];
+            static reg signed [31:0] temp32 = coeffs[size-1] * FXP_MUL;
             funcVal = 0;
             size--;
+            $display("%d",temp32);
             while (size != 0) 
             begin             
                 temp64 = temp32 * x;
-                temp32 = (temp64 >>> 16)  + coeffs[size-1]*(2**16);
+                $display("%h",temp64);
+                temp32 = (temp64 >>> FXP_SHIFT)  + coeffs[size-1] * FXP_MUL;
                 size--;  
+                $display("%h",temp32);
+                $display("%h",temp64);
             end
             funcVal = temp32;
         end

@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Wed Jun 10 23:38:22 2026" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Thu Jun 11 21:46:34 2026" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2018.2 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "2258646" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "LIN64" -context "software_version_and_target_device"
@@ -14,19 +14,19 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "c70da6fd-cda5-42d2-a494-33190792171f" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "cc8a7667970441a0afae347d5f4a52d2" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "300" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "339" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Fedora" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "Fedora Linux 43 (KDE Plasma Desktop Edition)" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "AMD Ryzen 3 2200G with Radeon Vega Graphics" -context "user_environment"
-webtalk_add_data -client project -key cpu_speed -value "1976.550 MHz" -context "user_environment"
+webtalk_add_data -client project -key cpu_speed -value "2445.202 MHz" -context "user_environment"
 webtalk_add_data -client project -key total_processors -value "1" -context "user_environment"
 webtalk_add_data -client project -key system_ram -value "14.000 GB" -context "user_environment"
 webtalk_register_client -client xsim
 webtalk_add_data -client xsim -key Command -value "xsim" -context "xsim\\command_line_options"
 webtalk_add_data -client xsim -key trace_waveform -value "true" -context "xsim\\usage"
-webtalk_add_data -client xsim -key runtime -value "10565 ns" -context "xsim\\usage"
+webtalk_add_data -client xsim -key runtime -value "11995 ns" -context "xsim\\usage"
 webtalk_add_data -client xsim -key iteration -value "1" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Simulation_Time -value "0.03_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Simulation_Memory -value "118316_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 3136645587 -regid "" -xml /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Simulation_Memory -value "118320_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 506780009 -regid "" -xml /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/msfet7/Code/SDUP/min_max_FPGA/min_max_main/min_max_main.sim/sim_1/behav/xsim/xsim.dir/main_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate
