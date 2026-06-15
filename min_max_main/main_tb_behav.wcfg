@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="main_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="main_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="1994994541fs"></ZoomStartTime>
+      <ZoomEndTime time="1995001092fs"></ZoomEndTime>
+      <Cursor1Time time="1994997000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <ValueColumnWidth column_width="138"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="9" />
+   <wvobject type="logic" fp_name="/main_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/main_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/main_tb/request">
+      <obj_property name="ElementShortName">request</obj_property>
+      <obj_property name="ObjectShortName">request</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/main_tb/leftBorder">
+      <obj_property name="ElementShortName">leftBorder[31:0]</obj_property>
+      <obj_property name="ObjectShortName">leftBorder[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/main_tb/rightBorder">
+      <obj_property name="ElementShortName">rightBorder[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rightBorder[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/main_tb/coeffs">
+      <obj_property name="ElementShortName">coeffs[0:5][31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeffs[0:5][31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/main_tb/status">
+      <obj_property name="ElementShortName">status</obj_property>
+      <obj_property name="ObjectShortName">status</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/main_tb/minimum">
+      <obj_property name="ElementShortName">minimum[31:0]</obj_property>
+      <obj_property name="ObjectShortName">minimum[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/main_tb/maximum">
+      <obj_property name="ElementShortName">maximum[31:0]</obj_property>
+      <obj_property name="ObjectShortName">maximum[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+</wave_config>
