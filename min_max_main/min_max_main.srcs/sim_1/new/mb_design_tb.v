@@ -1,55 +1,35 @@
-`timescale 1ns / 1ps
+`timescale 1 ps / 1 ps
 
-module mb_design_tb();
+module tb_top;
 
-    reg clk_n;
-    reg clk_p;
-    reg rst;
-    reg rst_0;
+reg clk;
+reg rst;
+wire txd;
 
-    wire [1:0]  gpio_control;
-    wire [31:0] gpio_maximum;
-    wire [31:0] gpio_minimum;
-    wire [0:0]  gpio_status;
+// -------------------------
+// 100 MHz clock
+// -------------------------
+initial clk = 0;
+always #5000 clk = ~clk;
 
-    // Przejście na typ real do podglądu w symulatorze
-    real r_minimum;
-    real r_maximum;
+// -------------------------
+// RESET (clock aligned)
+// -------------------------
+initial begin
+    rst = 1;
+    repeat (50) @(posedge clk);
+    rst = 0;
+end
 
-    initial begin
-        rst   = 1'b1;
-        rst_0 = 1'b0;
-        #40;
-        rst   = 1'b0;
-        rst_0 = 1'b1;
-    end
-
-    initial begin
-        clk_n = 1'b0;
-        clk_p = 1'b1;
-    end
-
-    always begin
-        #5;
-        clk_n = ~clk_n;
-        clk_p = ~clk_p;
-    end
-
-    // Poprawna konwersja Fixed-Point Q16.16 do Real dla XSIM
-    always @* begin
-        r_minimum = $signed(gpio_minimum) / 65536.0;
-        r_maximum = $signed(gpio_maximum) / 65536.0;
-    end
-
-    mb_design_wrapper mb_design_inst (
-        .diff_clock_rtl_clk_n(clk_n),
-        .diff_clock_rtl_clk_p(clk_p),
-        .gpio_control_tri_io(gpio_control),
-        .gpio_maximum_tri_io(gpio_maximum),
-        .gpio_minimum_tri_io(gpio_minimum),
-        .gpio_status_tri_io(gpio_status),
-        .reset_rtl(rst),
-        .reset_rtl_0(rst_0)
-    );
+// -------------------------
+// DUT
+// -------------------------
+mb_design_wrapper DUT (
+    .diff_clock_rtl_clk_p(clk),
+    .diff_clock_rtl_clk_n(~clk),
+    .reset_rtl(rst),
+    .uart_rtl_rxd(1'b1),
+    .uart_rtl_txd(txd)
+);
 
 endmodule

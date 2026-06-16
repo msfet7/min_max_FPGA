@@ -48,7 +48,7 @@
 
 
 // IP VLNV: user.org:user:minmax_ip:1.0
-// IP Revision: 5
+// IP Revision: 11
 
 (* X_CORE_INFO = "minmax_ip_v1_0,Vivado 2018.3" *)
 (* CHECK_LICENSE_TYPE = "mb_design_minmax_ip_0_0,minmax_ip_v1_0,{}" *)

@@ -48,7 +48,7 @@
 
 
 // IP VLNV: user.org:user:minmax_ip:1.0
-// IP Revision: 5
+// IP Revision: 11
 
 `timescale 1ns/1ps
 
