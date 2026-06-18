@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_top_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="ipif_pkg" />
+            <top_module name="lib_pkg" />
+            <top_module name="lmb_bram_if_funcs" />
+            <top_module name="mdm_funcs" />
+            <top_module name="tb_top" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="37115055000000fs"></ZoomStartTime>
+      <ZoomEndTime time="46200055000001fs"></ZoomEndTime>
+      <Cursor1Time time="45177555000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="272"></NameColumnWidth>
+      <ValueColumnWidth column_width="190"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="28" />
+   <wvobject type="logic" fp_name="/tb_top/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/rxd">
+      <obj_property name="ElementShortName">rxd</obj_property>
+      <obj_property name="ObjectShortName">rxd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/txd">
+      <obj_property name="ElementShortName">txd</obj_property>
+      <obj_property name="ObjectShortName">txd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/rx_active">
+      <obj_property name="ElementShortName">rx_active</obj_property>
+      <obj_property name="ObjectShortName">rx_active</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/rx_shift">
+      <obj_property name="ElementShortName">rx_shift[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_shift[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/CLK_HALF_PS">
+      <obj_property name="ElementShortName">CLK_HALF_PS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CLK_HALF_PS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/BIT_PS">
+      <obj_property name="ElementShortName">BIT_PS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BIT_PS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/RESET_CYCLES">
+      <obj_property name="ElementShortName">RESET_CYCLES[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RESET_CYCLES[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/request">
+      <obj_property name="ElementShortName">request</obj_property>
+      <obj_property name="ObjectShortName">request</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/leftBorder">
+      <obj_property name="ElementShortName">leftBorder[31:0]</obj_property>
+      <obj_property name="ObjectShortName">leftBorder[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/rightBorder">
+      <obj_property name="ElementShortName">rightBorder[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rightBorder[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/coeff0">
+      <obj_property name="ElementShortName">coeff0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeff0[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/coeff1">
+      <obj_property name="ElementShortName">coeff1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeff1[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/coeff2">
+      <obj_property name="ElementShortName">coeff2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeff2[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/coeff3">
+      <obj_property name="ElementShortName">coeff3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeff3[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/coeff4">
+      <obj_property name="ElementShortName">coeff4[31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeff4[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/coeff5">
+      <obj_property name="ElementShortName">coeff5[31:0]</obj_property>
+      <obj_property name="ObjectShortName">coeff5[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/state">
+      <obj_property name="ElementShortName">state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">state[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/axi_uartlite_0/U0/UARTLITE_CORE_I/UARTLITE_TX_I/data_to_transfer">
+      <obj_property name="ElementShortName">data_to_transfer[0:7]</obj_property>
+      <obj_property name="ObjectShortName">data_to_transfer[0:7]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/axi_uartlite_0/U0/UARTLITE_CORE_I/UARTLITE_RX_I/data_shift">
+      <obj_property name="ElementShortName">data_shift[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_shift[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/tb_top/DUT/mb_design_i/axi_uartlite_0/U0/UARTLITE_CORE_I/UARTLITE_RX_I/start_Edge_Detected">
+      <obj_property name="ElementShortName">start_Edge_Detected</obj_property>
+      <obj_property name="ObjectShortName">start_Edge_Detected</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_top/DUT/mb_design_i/axi_uartlite_0/U0/UARTLITE_CORE_I/UARTLITE_RX_I/start_Edge_Detected_Bit">
+      <obj_property name="ElementShortName">start_Edge_Detected_Bit</obj_property>
+      <obj_property name="ObjectShortName">start_Edge_Detected_Bit</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/tb_top/DUT/mb_design_i/axi_uartlite_0/U0/UARTLITE_CORE_I/UARTLITE_RX_I/running">
+      <obj_property name="ElementShortName">running</obj_property>
+      <obj_property name="ObjectShortName">running</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/axi_uartlite_0/U0/UARTLITE_CORE_I/UARTLITE_RX_I/serial_to_Par">
+      <obj_property name="ElementShortName">serial_to_Par[1:8]</obj_property>
+      <obj_property name="ObjectShortName">serial_to_Par[1:8]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/minimum">
+      <obj_property name="ElementShortName">minimum[31:0]</obj_property>
+      <obj_property name="ObjectShortName">minimum[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_top/DUT/mb_design_i/minmax_ip_0/inst/minmax_ip_v1_0_S00_AXI_inst/minMax_inst/maximum">
+      <obj_property name="ElementShortName">maximum[31:0]</obj_property>
+      <obj_property name="ObjectShortName">maximum[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">16</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+</wave_config>
