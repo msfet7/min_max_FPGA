@@ -4,116 +4,169 @@
 *            Krzysztof Paryż <paryzk@student.agh.edu.pl>
 */
 
-/**
-    Brief: Module is implementing state machine, that will find minimum and maximum
-            values of function with given 5 coefficients and borders. 
-    Params: [in]  clk - clock 
-            [in]  reset - reset signal, that clears status and resets state machine
-            [in]  request - bit set by user if borders and coefficients are set
-            [in]  leftBorder - left border of a function from which min/max values will be searched
-            [in]  rightBorder - right border of a function yo which min/max values will be searched
-            [in]  coeffs - coefficients of a function (max 6)
-            [out] status - status of operation:
-                        * 0 - output data not ready
-                        * 1 - output data ready
-            [out] minimum - found <x,y> coordinates of minimum
-            [out] maximum - found <x,y> coordinates of maximum
-*/
+module minMaxModule (
+    input  logic        clk,
+    input  logic        reset,
+    input  logic        request,
+    input  logic signed [31:0] leftBorder,
+    input  logic signed [31:0] rightBorder,
+    input  logic signed [31:0] coeff0,
+    input  logic signed [31:0] coeff1,
+    input  logic signed [31:0] coeff2,
+    input  logic signed [31:0] coeff3,
+    input  logic signed [31:0] coeff4,
+    input  logic signed [31:0] coeff5,
+    output logic        status,
+    output logic signed [31:0] minimum,
+    output logic signed [31:0] maximum
+);
 
+    localparam int            FXP_SHIFT = 16;
+    localparam logic signed [31:0] STEP    = 32'sd6553;
+    localparam logic signed [31:0] MAX_POS = 32'h7FFF_FFFF;
+    localparam logic signed [31:0] MIN_NEG = 32'h8000_0000;
 
+    wire signed [31:0] coeffs [0:5];
+    assign coeffs[0] = coeff0;
+    assign coeffs[1] = coeff1;
+    assign coeffs[2] = coeff2;
+    assign coeffs[3] = coeff3;
+    assign coeffs[4] = coeff4;
+    assign coeffs[5] = coeff5;
 
-module minMaxModule (input clk,
-                     input reset,
-                     input request,
-                     input signed [31:0] leftBorder,
-                     input signed [31:0] rightBorder,
-                     input signed [31:0] coeffs [0:5],
-                     output reg status,
-                     output reg signed [31:0] minimum,
-                     output reg signed [31:0] maximum);
- 
-    /* Fixed point (32|16) related variables */
-    parameter FXP_MUL = 2**16;
-    parameter FXP_SHIFT = 16;
- 
-    /* min/max search variables */
-    reg [31:0] step = 6554; // 0.1 * 2^16 = 6553.6 → 6554
- 
-    reg signed [31:0] current_x = 0;
-    reg signed [31:0] current_y = 0;
+    (* max_fanout = 4 *) logic signed [31:0] coeffs_r [0:5];
+    always_ff @(posedge clk) begin : REG_COEFFS
+        for (int i = 0; i < 6; i++)
+            coeffs_r[i] <= coeffs[i];
+    end
 
-    (* max_fanout = 4 *) reg signed [31:0] current_min = 32'h7FFFFFFF;
-    (* max_fanout = 4 *) reg signed [31:0] current_max = 32'h80000000;
-    
-    /* FSM variables */
-    typedef enum {  IDLE,
-                    BORDER_CALC,
-                    SCAN,
-                    FINISH} state_T;
-    state_T state;
- 
-    always @(posedge clk) 
-    begin
-        if(reset == 1'b1)
-        begin
-            status <= 0;
-            state <= IDLE;
-            current_x <= leftBorder;
-            maximum  <= 0;
-            minimum <= 0;
+    typedef enum logic [1:0] {
+        IDLE,
+        CALC_STEP,
+        COMPARE,
+        FINISH
+    } state_t;
+
+    state_t state;
+
+    logic mul_phase;
+
+    logic signed [31:0] current_x;
+    logic signed [31:0] current_min;
+    logic signed [31:0] current_max;
+
+    logic signed [63:0] acc64;
+    logic signed [31:0] acc32;
+
+    logic [2:0] coeff_idx;
+
+    logic [1:0] eval_mode;
+    localparam logic [1:0] MODE_LEFT  = 2'b00;
+    localparam logic [1:0] MODE_RIGHT = 2'b01;
+    localparam logic [1:0] MODE_GRID  = 2'b10;
+
+    logic signed [31:0] eval_x;
+
+    task automatic start_eval(input logic signed [31:0] x);
+        eval_x    <= x;
+        acc32     <= coeffs_r[5];
+        coeff_idx <= 3'd4;
+        mul_phase <= 1'b0;
+        state     <= CALC_STEP;
+    endtask
+
+    always_ff @(posedge clk) begin
+        if (reset) begin
+            status      <= 1'b0;
+            state       <= IDLE;
+            current_x   <= '0;
+            current_min <= MAX_POS;
+            current_max <= MIN_NEG;
+            minimum     <= '0;
+            maximum     <= '0;
+            mul_phase   <= 1'b0;
+            eval_mode   <= MODE_LEFT;
         end
-        else 
-        begin
+        else begin
             case (state)
-                IDLE: begin
-                    current_x <= leftBorder;
-                    state = (request == 1'b1) ? BORDER_CALC : IDLE;
-                end
-                BORDER_CALC: begin
-                    current_min <= 32'h7FFFFFFF;
-                    current_max <= 32'h80000000;
-                    state <= SCAN;
-                end
-                SCAN: begin
 
-                    current_y = coeffs[5];
-                    current_y = (current_y * current_x) >>> FXP_SHIFT + coeffs[4];
-                    current_y = (current_y * current_x) >>> FXP_SHIFT + coeffs[3];
-                    current_y = (current_y * current_x) >>> FXP_SHIFT + coeffs[2];
-                    current_y = (current_y * current_x) >>> FXP_SHIFT + coeffs[1];
-                    current_y = (current_y * current_x) >>> FXP_SHIFT + coeffs[0];
- 
-                    if(current_y > current_max)
-                    begin
-                        current_max <= current_y;
+                IDLE: begin
+                    status <= 1'b1;
+                    if (request) begin
+                        status <= 1'b0;
+                        current_min <= MAX_POS;
+                        current_max <= MIN_NEG;
+                        current_x   <= leftBorder;
+                        eval_mode   <= MODE_LEFT;
+                        start_eval(leftBorder);
                     end
-                    if(current_y < current_min)
-                    begin
-                        current_min <= current_y;
-                    end
-                    current_x <= current_x + step;
- 
-                    if(current_x + step > rightBorder)
-                    begin
-                        maximum <= current_max;
-                        minimum <= current_min;
-                        state <= FINISH;
-                    end
-                end 
-                FINISH: begin
-                    current_max <= 32'h80000000;
-                    current_min <= 32'h7FFFFFFF;
-                    current_x <= leftBorder;
- 
-                    status <= 1;
-                    state <= (request == 0) ? IDLE : FINISH;
-                end 
-                default: begin
                 end
+
+                CALC_STEP: begin
+                    if (!mul_phase) begin
+                        acc64     <= acc32 * eval_x;
+                        mul_phase <= 1'b1;
+                    end
+                    else begin
+                        acc32     <= (acc64 >>> FXP_SHIFT) + coeffs_r[coeff_idx];
+                        mul_phase <= 1'b0;
+
+                        if (coeff_idx == 3'd0)
+                            state <= COMPARE;
+                        else
+                            coeff_idx <= coeff_idx - 3'd1;
+                    end
+                end
+
+                COMPARE: begin
+                    if (acc32 < current_min) current_min <= acc32;
+                    if (acc32 > current_max) current_max <= acc32;
+
+                    case (eval_mode)
+                        MODE_LEFT: begin
+                            eval_mode <= MODE_RIGHT;
+                            start_eval(rightBorder);
+                        end
+
+                        MODE_RIGHT: begin
+                            if (leftBorder + STEP < rightBorder) begin
+                                current_x <= leftBorder + STEP;
+                                eval_mode <= MODE_GRID;
+                                start_eval(leftBorder + STEP);
+                            end
+                            else begin
+                                minimum <= (acc32 < current_min) ? acc32 : current_min;
+                                maximum <= (acc32 > current_max) ? acc32 : current_max;
+                                state   <= FINISH;
+                            end
+                        end
+
+                        MODE_GRID: begin
+                            if (current_x + STEP < rightBorder) begin
+                                current_x <= current_x + STEP;
+                                start_eval(current_x + STEP);
+                            end
+                            else begin
+                                minimum <= (acc32 < current_min) ? acc32 : current_min;
+                                maximum <= (acc32 > current_max) ? acc32 : current_max;
+                                state   <= FINISH;
+                            end
+                        end
+
+                        default: state <= IDLE;
+                    endcase
+                end
+
+                FINISH: begin
+                    status <= 1'b1;
+                    if (!request)
+                        state <= IDLE;
+                end
+
+                default: state <= IDLE;
+
             endcase
         end
     end
- 
-endmodule
- 
 
+endmodule
